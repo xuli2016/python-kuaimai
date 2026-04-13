@@ -107,29 +107,30 @@ print(response.to_dict())
 - 某些接口在公开文档中没有单独列出专属错误码，这种情况下请以实际返回的 `code` 和 `message` 为准
 - 同一个错误码在不同接口中的含义通常保持一致
 
+<a id="api-列表"></a>
 ## 三、API 列表
 
 | API | 描述 |
 | --- | --- |
-| `BindDeviceRequest` | 绑定设备，适用机型：所有快麦机型 |
-| `UnbindDeviceRequest` | 解绑设备，适用机型：所有快麦机型 |
-| `QueryDeviceStatusRequest` | 查询设备状态，适用机型：所有快麦机型 |
-| `TsplTemplatePrintRequest` | 标签模板打印-间隙纸，适用机型：KM118 系列、KME31 系列、KME41 系列、KME20 系列、KMSX 系列 |
-| `EscTemplatePrintRequest` | 小票模板打印-连续纸，适用机型：KM118 系列、KME31 系列、KME41 系列、KME20 系列 |
-| `TsplTemplateWriteRequest` | 小票模板打印-间隙纸，适用机型：KM118 系列、KME31 系列、KME41 系列、KME20 系列 |
-| `TsplXmlWriteRequest` | 自定义 XML 打印-间隙纸 |
-| `EscXmlWriteRequest` | 自定义 XML 打印-连续纸 |
-| `TsplImageRequest` | 图片直接打印-间隙纸 |
-| `EscImageRequest` | 图片直接打印-连续纸 |
-| `TsplPdfPrintRequest` | PDF 直接打印-间隙纸 |
-| `EscPdfPrintRequest` | PDF 直接打印-连续纸 |
-| `ResultRequest` | 打印任务结果查询 |
-| `BroadcastRequest` | 语音播报 |
-| `CancelJobRequest` | 取消待打印任务 |
-| `AdjustDeviceDensityRequest` | 调节设备浓度 |
-| `GetCainiaoCodeRequest` | KM360C 获取云打印机 code |
-| `CainiaoBindRequest` | KM360C 绑定云打印机 |
-| `CainiaoPrintRequest` | KM360C 图片打印 |
+| [`BindDeviceRequest`](#1-绑定设备) | 绑定设备，适用机型：所有快麦机型 |
+| [`UnbindDeviceRequest`](#2-解绑设备) | 解绑设备，适用机型：所有快麦机型 |
+| [`QueryDeviceStatusRequest`](#3-查询设备状态) | 查询设备状态，适用机型：所有快麦机型 |
+| [`TsplTemplatePrintRequest`](#4-标签模板打印-间隙纸) | 标签模板打印-间隙纸，适用机型：KM118 系列、KME31 系列、KME41 系列、KME20 系列、KMSX 系列 |
+| [`EscTemplatePrintRequest`](#5-小票模板打印-连续纸) | 小票模板打印-连续纸，适用机型：KM118 系列、KME31 系列、KME41 系列、KME20 系列 |
+| [`TsplTemplateWriteRequest`](#6-小票模板打印-间隙纸) | 小票模板打印-间隙纸，适用机型：KM118 系列、KME31 系列、KME41 系列、KME20 系列 |
+| [`TsplXmlWriteRequest`](#7-自定义-xml-打印-间隙纸) | 自定义 XML 打印-间隙纸 |
+| [`EscXmlWriteRequest`](#8-自定义-xml-打印-连续纸) | 自定义 XML 打印-连续纸 |
+| [`TsplImageRequest`](#9-图片直接打印-间隙纸) | 图片直接打印-间隙纸 |
+| [`EscImageRequest`](#10-图片直接打印-连续纸) | 图片直接打印-连续纸 |
+| [`TsplPdfPrintRequest`](#11-pdf-直接打印-间隙纸) | PDF 直接打印-间隙纸 |
+| [`EscPdfPrintRequest`](#12-pdf-直接打印-连续纸) | PDF 直接打印-连续纸 |
+| [`ResultRequest`](#13-打印任务结果查询) | 打印任务结果查询 |
+| [`BroadcastRequest`](#14-语音播报) | 语音播报 |
+| [`CancelJobRequest`](#15-取消待打印任务) | 取消待打印任务 |
+| [`AdjustDeviceDensityRequest`](#16-调节设备浓度) | 调节设备浓度 |
+| [`GetCainiaoCodeRequest`](#17-km360c-获取云打印机-code) | KM360C 获取云打印机 code |
+| [`CainiaoBindRequest`](#18-km360c-绑定云打印机) | KM360C 绑定云打印机 |
+| [`CainiaoPrintRequest`](#19-km360c-图片打印) | KM360C 图片打印 |
 
 ## 四、接口说明
 
@@ -165,6 +166,8 @@ response = client.get_acs_response(request)
 | `4001` | 该序列号不存在或未激活 | 检查序列号是否与机器底部或自检页一致；Wi-Fi 机型检查是否已配网；4G 机型检查是否已开机联网 |
 | `4009` | 设备密钥不正确 | 检查机器底部设备密钥是否填写正确 |
 
+[↑ 返回API列表](#api-列表)
+
 ### 2. 解绑设备
 
 **`UnbindDeviceRequest`**
@@ -194,6 +197,8 @@ response = client.get_acs_response(request)
 | --- | --- | --- |
 | `4001` | 该序列号不存在或未激活 | 检查序列号是否与机器底部或自检页一致；Wi-Fi 机型检查是否已配网；4G 机型检查是否已开机联网 |
 | `4009` | 设备密钥不正确 | 检查机器底部设备密钥是否填写正确 |
+
+[↑ 返回API列表](#api-列表)
 
 ### 3. 查询设备状态
 
@@ -230,6 +235,8 @@ response = client.get_acs_response(request)
 #### 错误码
 
 公开文档未单独列出该接口专属错误码；调用失败时请以接口实际返回的 `code` 和 `message` 为准。
+
+[↑ 返回API列表](#api-列表)
 
 ### 4. 标签模板打印-间隙纸
 
@@ -289,6 +296,8 @@ response = client.get_acs_response(request)
 | `6015` | 无权限模板访问 | 检查 `templateId` 是否属于当前 `appid` 创建的模板 |
 | `6010` | 模板类型不匹配 | 检查 `templateId` 是否与当前打印接口类型一致 |
 
+[↑ 返回API列表](#api-列表)
+
 ### 5. 小票模板打印-连续纸
 
 **`EscTemplatePrintRequest`**
@@ -328,6 +337,8 @@ response = client.get_acs_response(request)
 | `6015` | 无权限模板访问 | 检查 `templateId` 是否属于当前 `appid` 创建的模板 |
 | `6010` | 模板类型不匹配 | 检查 `templateId` 是否与当前打印接口类型一致 |
 
+[↑ 返回API列表](#api-列表)
+
 ### 6. 小票模板打印-间隙纸
 
 **`TsplTemplateWriteRequest`**
@@ -366,6 +377,8 @@ response = client.get_acs_response(request)
 | `6015` | 无权限模板访问 | 检查 `templateId` 是否属于当前 `appid` 创建的模板 |
 | `6010` | 模板类型不匹配 | 检查 `templateId` 是否与当前打印接口类型一致 |
 
+[↑ 返回API列表](#api-列表)
+
 ### 7. 自定义 XML 打印-间隙纸
 
 **`TsplXmlWriteRequest`**
@@ -401,6 +414,8 @@ response = client.get_acs_response(request)
 | `4005` | 设备离线 | 检查设备联网状态 |
 | `6024` | XML 数据过大 | 如果使用批量打印，控制数组长度小于等于 20 |
 
+[↑ 返回API列表](#api-列表)
+
 ### 8. 自定义 XML 打印-连续纸
 
 **`EscXmlWriteRequest`**
@@ -433,6 +448,8 @@ response = client.get_acs_response(request)
 | --- | --- | --- |
 | `4001` | 该序列号不存在或未激活 | 检查序列号、配网状态和设备开机状态 |
 | `4005` | 设备离线 | 检查设备联网状态 |
+
+[↑ 返回API列表](#api-列表)
 
 ### 9. 图片直接打印-间隙纸
 
@@ -471,6 +488,8 @@ response = client.get_acs_response(request)
 | `4005` | 设备离线 | 检查设备联网状态 |
 | `6019` | 打印内容过大 | 减少图片数据大小，建议控制在平台限制内 |
 
+[↑ 返回API列表](#api-列表)
+
 ### 10. 图片直接打印-连续纸
 
 **`EscImageRequest`**
@@ -505,6 +524,8 @@ response = client.get_acs_response(request)
 | `4001` | 该序列号不存在或未激活 | 检查序列号、配网状态和设备开机状态 |
 | `4005` | 设备离线 | 检查设备联网状态 |
 | `6019` | 打印内容过大 | 减少图片数据大小，建议控制在平台限制内 |
+
+[↑ 返回API列表](#api-列表)
 
 ### 11. PDF 直接打印-间隙纸
 
@@ -555,6 +576,8 @@ response = client.tsplPdfsPrint(request)
 | `4001` | 该序列号不存在或未激活 | 检查序列号、配网状态和设备开机状态 |
 | `4005` | 设备离线 | 检查设备联网状态 |
 | `6019` | 打印内容过大 | 减少 PDF 渲染后数据大小，必要时缩小尺寸或拆页打印 |
+
+[↑ 返回API列表](#api-列表)
 
 ### 12. PDF 直接打印-连续纸
 
@@ -607,6 +630,8 @@ response = client.escPdfsPrint(request)
 | `4005` | 设备离线 | 检查设备联网状态 |
 | `6019` | 打印内容过大 | 减少 PDF 渲染后数据大小，必要时缩小尺寸或拆页打印 |
 
+[↑ 返回API列表](#api-列表)
+
 ### 13. 打印任务结果查询
 
 **`ResultRequest`**
@@ -650,6 +675,8 @@ response = client.get_acs_response(request)
 | `6026` | 打印结果查询超过限制 | 控制单次查询的任务 ID 数量小于等于 50 |
 | `6021` | 该序列号查询过于频繁 | 降低查询频率，避免对同一序列号高频查询 |
 
+[↑ 返回API列表](#api-列表)
+
 ### 14. 语音播报
 
 **`BroadcastRequest`**
@@ -685,6 +712,8 @@ response = client.get_acs_response(request)
 | `6035` | 该机型不支持语言播报 | 使用支持语音播报的机型 |
 | `4005` | 设备离线 | 检查设备联网状态 |
 
+[↑ 返回API列表](#api-列表)
+
 ### 15. 取消待打印任务
 
 **`CancelJobRequest`**
@@ -707,6 +736,8 @@ response = client.get_acs_response(request)
 #### 错误码
 
 公开文档未单独列出该接口专属错误码；调用失败时请以接口实际返回的 `code` 和 `message` 为准。
+
+[↑ 返回API列表](#api-列表)
 
 ### 16. 调节设备浓度
 
@@ -737,6 +768,8 @@ response = client.get_acs_response(request)
 
 公开文档未单独列出该接口专属错误码；调用失败时请以接口实际返回的 `code` 和 `message` 为准。
 
+[↑ 返回API列表](#api-列表)
+
 ### 17. KM360C 获取云打印机 code
 
 **`GetCainiaoCodeRequest`**
@@ -763,6 +796,8 @@ response = client.get_acs_response(request)
 #### 错误码
 
 公开文档未单独列出该接口专属错误码；调用失败时请以接口实际返回的 `code` 和 `message` 为准。
+
+[↑ 返回API列表](#api-列表)
 
 ### 18. KM360C 绑定云打印机
 
@@ -791,6 +826,8 @@ response = client.get_acs_response(request)
 
 公开文档未单独列出该接口专属错误码；调用失败时请以接口实际返回的 `code` 和 `message` 为准。
 
+[↑ 返回API列表](#api-列表)
+
 ### 19. KM360C 图片打印
 
 **`CainiaoPrintRequest`**
@@ -817,6 +854,8 @@ response = client.get_acs_response(request)
 #### 错误码
 
 公开文档未单独列出该接口专属错误码；调用失败时请以接口实际返回的 `code` 和 `message` 为准。
+
+[↑ 返回API列表](#api-列表)
 
 ## 五、与 CloudExample.py 的对应关系
 
