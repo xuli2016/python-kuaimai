@@ -6,10 +6,10 @@
 
 - `CloudExample.py`
 - `requirements.txt`
-- `packages/` 里的本地 SDK wheel
+- `requirements-py36.txt`
+- `packages/` 里的正式版和 Legacy SDK wheel
 
-
-- Python 交付方式：`CloudExample.py + packages/*.whl`
+- Python 交付方式：`CloudExample.py + 两个 requirements 文件 + packages/*.whl`
 
 也就是说，对接用户拿到这个目录之后，安装依赖、改参数、运行脚本即可。
 
@@ -18,9 +18,11 @@
 - `CloudExample.py`
   示例入口
 - `requirements.txt`
-  安装 SDK 的依赖文件。会优先安装 `packages/` 里的本地 wheel。
+  Python 3.10 及以上使用，安装正式版 SDK wheel。
+- `requirements-py36.txt`
+  Python 3.6–3.9 使用，安装 Legacy SDK wheel。
 - `packages/`
-  随 demo 一起交付的 SDK wheel。
+  随 demo 一起交付的两个 SDK wheel。
 
 说明：
 
@@ -30,9 +32,14 @@
 
 ## 运行环境要求
 
-建议使用：
+支持两个运行范围：
 
-- Python `3.10+`
+| Python 版本 | 安装文件 | SDK 发布包 |
+| --- | --- | --- |
+| `3.6`–`3.9` | `requirements-py36.txt` | `python-kuaimai-core-legacy` |
+| `3.10+` | `requirements.txt` | `python-kuaimai-core` |
+
+两个 SDK 提供相同的 `kuaimai_core` 导入路径，不能同时安装在同一个虚拟环境中。Python 3.6 已停止安全维护，只用于无法升级的旧项目。
 
 推荐先创建虚拟环境：
 
@@ -56,16 +63,23 @@ python -m venv .venv
 
 ### 1. Python 依赖
 
-执行：
+Python 3.10 及以上执行：
 
 ```bash
 pip install -r requirements.txt
 ```
 
-`requirements.txt` 会安装本地 wheel，例如：
+Python 3.6–3.9 执行：
+
+```bash
+pip install -r requirements-py36.txt
+```
+
+两个 requirements 文件会分别安装对应的本地 wheel，例如：
 
 ```text
 ./packages/python_kuaimai_core-0.1.0-py3-none-any.whl
+./packages/python_kuaimai_core_legacy-0.1.0-py3-none-any.whl
 ```
 
 然后 `pip` 会继续安装 SDK 依赖的 Python 包，例如：
@@ -356,7 +370,8 @@ SDK 会对图片、PDF 做适当缩放后再下发打印。
 如果你拿到了新的 wheel 包，需要在当前虚拟环境里强制重装一次：
 
 ```bash
-pip install --force-reinstall --no-deps ./packages/python_kuaimai_core-0.1.0-py3-none-any.whl
+pip install --force-reinstall --no-deps ./packages/python_kuaimai_core-0.1.0-py3-none-any.whl         # Python 3.10+
+pip install --force-reinstall --no-deps ./packages/python_kuaimai_core_legacy-0.1.0-py3-none-any.whl  # Python 3.6–3.9
 ```
 
 否则当前环境里可能还在使用旧版本 SDK。
@@ -368,8 +383,13 @@ pip install --force-reinstall --no-deps ./packages/python_kuaimai_core-0.1.0-py3
 说明还没有先执行：
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt         # Python 3.10+
+pip install -r requirements-py36.txt    # Python 3.6–3.9
 ```
+
+### 安装时报 `No matching distribution found for Pillow`
+
+先执行 `python --version`，再选择与 Python 版本对应的 requirements 文件。Python 3.6 不能安装正式版 SDK，必须使用 `requirements-py36.txt`。
 
 ### 运行时报认证或设备相关错误
 
@@ -395,8 +415,7 @@ pip install -r requirements.txt
 
 对接用户的使用方式很简单：
 
-1. 安装依赖
+1. 根据 Python 版本选择 requirements 文件并安装依赖
 2. 改 `CloudExample.py` 顶部参数
 3. 在 `main()` 中只打开一个示例
 4. 运行 `python CloudExample.py`
-

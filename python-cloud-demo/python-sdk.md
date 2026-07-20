@@ -6,7 +6,14 @@
 
 ### 1. 安装运行环境
 
-建议使用 Python 3.10 及以上版本。
+SDK 分为两个发布包，业务代码和导入路径相同：
+
+| Python 版本 | 安装命令 |
+| --- | --- |
+| Python 3.6–3.9 | `pip install -r requirements-py36.txt` |
+| Python 3.10 及以上 | `pip install -r requirements.txt` |
+
+两个发布包不能安装在同一个虚拟环境中。Python 3.6 已停止安全维护，Legacy 包只用于无法升级的旧项目。
 
 Linux / macOS：
 
@@ -14,7 +21,7 @@ Linux / macOS：
 cd python-cloud-demo
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements.txt  # Python 3.10+
 ```
 
 Windows：
@@ -24,6 +31,12 @@ cd python-cloud-demo
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
+```
+
+Windows Python 3.6–3.9 将最后一行换成：
+
+```bat
+pip install -r requirements-py36.txt
 ```
 
 ### 2. 申请开放平台凭证
