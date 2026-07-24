@@ -36,8 +36,12 @@ pip install -r requirements.txt
 Windows Python 3.6–3.9 将最后一行换成：
 
 ```bat
-pip install -r requirements-py36.txt
+python -m pip install -r requirements-py36.txt
 ```
+
+请保留随交付包提供的 `packages/qrcode-7.3.1-py3-none-any.whl`。
+`requirements-py36.txt` 会先安装这个预构建 wheel，避免客户机器使用
+`setuptools` 编译 `qrcode` 源码包。
 
 ### 2. 申请开放平台凭证
 

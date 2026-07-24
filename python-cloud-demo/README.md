@@ -7,7 +7,7 @@
 - `CloudExample.py`
 - `requirements.txt`
 - `requirements-py36.txt`
-- `packages/` 里的正式版和 Legacy SDK wheel
+- `packages/` 里的两个 SDK wheel 和 Python 3.6 预构建依赖 wheel
 
 - Python 交付方式：`CloudExample.py + 两个 requirements 文件 + packages/*.whl`
 
@@ -20,9 +20,9 @@
 - `requirements.txt`
   Python 3.10 及以上使用，安装正式版 SDK wheel。
 - `requirements-py36.txt`
-  Python 3.6–3.9 使用，安装 Legacy SDK wheel。
+  Python 3.6–3.9 使用，先安装预构建的 `qrcode` wheel，再安装 Legacy SDK wheel。
 - `packages/`
-  随 demo 一起交付的两个 SDK wheel。
+  随 demo 一起交付的两个 SDK wheel，以及 `qrcode 7.3.1` 预构建 wheel。
 
 说明：
 
@@ -79,6 +79,7 @@ pip install -r requirements-py36.txt
 
 ```text
 ./packages/python_kuaimai_core-0.1.0-py3-none-any.whl
+./packages/qrcode-7.3.1-py3-none-any.whl
 ./packages/python_kuaimai_core_legacy-0.1.0-py3-none-any.whl
 ```
 
@@ -90,6 +91,11 @@ pip install -r requirements-py36.txt
 - `reportlab`
 - `treepoem`
 - `pypdfium2`
+
+`qrcode 7.3.1` 在 PyPI 上只有源码包。Legacy 交付中预先提供
+`qrcode-7.3.1-py3-none-any.whl`，是为了避免在客户的 Python 3.6
+机器上运行 `setup.py`。不要删除这个 wheel，也不要把
+`requirements-py36.txt` 改回只安装 Legacy SDK。
 
 如果客户机器不能直接访问 PyPI，需要提前准备：
 
@@ -390,6 +396,18 @@ pip install -r requirements-py36.txt    # Python 3.6–3.9
 ### 安装时报 `No matching distribution found for Pillow`
 
 先执行 `python --version`，再选择与 Python 版本对应的 requirements 文件。Python 3.6 不能安装正式版 SDK，必须使用 `requirements-py36.txt`。
+
+### 安装 `qrcode` 时出现 `setuptools` 的 `SyntaxError`
+
+不要单独执行 `pip install python_kuaimai_core_legacy-*.whl`。请保留完整的
+`packages/` 目录，并在 `python-cloud-demo` 目录执行：
+
+```bat
+python -m pip install -r requirements-py36.txt
+```
+
+该文件会直接安装随包提供的 `qrcode` wheel，不会在客户机器上执行
+`qrcode` 的 `setup.py`。
 
 ### 运行时报认证或设备相关错误
 
