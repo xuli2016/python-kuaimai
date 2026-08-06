@@ -146,6 +146,7 @@ def tspl_template_print_example(client: KuaimaiClient):
         renderDataArray=RENDER_DATA_ARRAY,
         printTimes=1,
         image=True,
+        dpi=300,  # 可选：203（默认）或 300；300dpi 本地渲染按 12 dots/mm 生成
     )
     return send(client, request)
 
@@ -195,6 +196,9 @@ def tspl_image_print_example(client: KuaimaiClient):
         sn=require_value("TEST_SN", TEST_SN),
         imageBase64=read_image_as_data_url(),
         printTimes=1,
+        dpi=300,
+        setWidth=75,
+        setHeight=100,
     )
     return send(client, request)
 
@@ -204,6 +208,7 @@ def tspl_pdf_print_example(client: KuaimaiClient):
     request = TsplPdfPrintRequest(
         sn=require_value("TEST_SN", TEST_SN),
         file=require_pdf_path(),
+        dpi=300,
     )
     return send(client, request)
 
@@ -213,6 +218,7 @@ def tspl_pdfs_print_example(client: KuaimaiClient):
     request = TsplPdfPrintRequest(
         sn=require_value("TEST_SN", TEST_SN),
         file=require_pdf_path(),
+        dpi=300,
     )
     return client.tsplPdfsPrint(request)
 

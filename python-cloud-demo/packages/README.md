@@ -4,9 +4,9 @@
 `qrcode` 预构建 wheel：
 
 ```text
-python_kuaimai_core-0.1.0-py3-none-any.whl
+python_kuaimai_core-0.1.1-py3-none-any.whl
 qrcode-7.3.1-py3-none-any.whl
-python_kuaimai_core_legacy-0.1.0-py3-none-any.whl
+python_kuaimai_core_legacy-0.1.1-py3-none-any.whl
 ```
 
 不要把 wheel 改名成 `latest` 之类的别名，`pip` 会把它识别成不合法的 wheel 文件名。

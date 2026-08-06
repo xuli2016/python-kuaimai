@@ -271,7 +271,7 @@ response = client.get_acs_response(request)
 | `renderDataJsonArray` | 动态渲染数据 | `list` / `Any` | 否 | 也可直接传 Python 对象 |
 | `printTimes` | 打印份数 | `int` | 否 | 默认 1 |
 | `image` | 是否图片方式渲染 | `bool` | 否 | `True` 时运行机器需安装模板对应字体 |
-| `dpi` | 分辨率 | `int` | 否 | 常见值 `203` / `300` |
+| `dpi` | 分辨率 | `int` | 否 | `203`（默认）或 `300`；其他值返回参数错误 |
 | `imei` | KM360C 专用 | `str` | 条件必传 | KM360C 场景可只传 `imei` 不传 `sn` |
 
 #### Python 示例
@@ -285,6 +285,7 @@ request = TsplTemplatePrintRequest(
     renderDataArray='[{"table_test":[{"key_test":"3449394"}]}]',
     printTimes=1,
     image=True,
+    dpi=300,  # 直接按 12 dots/mm 本地渲染，不经过 203dpi 图片放大
 )
 response = client.get_acs_response(request)
 ```
@@ -482,7 +483,7 @@ response = client.get_acs_response(request)
 | `printTimes` | 打印份数 | `int` | 否 | 默认 1 |
 | `setWidth` | 标签宽度 | `int` | 否 | 单位 mm |
 | `setHeight` | 标签高度 | `int` | 否 | 单位 mm |
-| `dpi` | 分辨率 | `int` | 否 | 常见值 `203` / `300` |
+| `dpi` | 分辨率 | `int` | 否 | `203`（默认）或 `300`；其他值返回参数错误 |
 
 #### Python 示例
 
@@ -493,6 +494,9 @@ request = TsplImageRequest(
     sn="KM118DW123",
     imageBase64="data:image/png;base64,......",
     printTimes=1,
+    dpi=300,
+    setWidth=75,
+    setHeight=100,
 )
 response = client.get_acs_response(request)
 ```
@@ -556,7 +560,7 @@ response = client.get_acs_response(request)
 | `file` | PDF 文件 | `str` / `Path` | 是 | 本地 PDF 路径 |
 | `width` | 标签宽度 | `int` | 否 | 单位 mm，默认 75 |
 | `height` | 标签高度 | `int` | 否 | 单位 mm，默认 100 |
-| `dpi` | 分辨率 | `int` | 否 | 默认 203 |
+| `dpi` | 分辨率 | `int` | 否 | `203`（默认）或 `300`；300dpi PDF 按目标分辨率转换 |
 
 #### Python 示例-单页
 
@@ -568,6 +572,7 @@ from kuaimai_core.request import TsplPdfPrintRequest
 request = TsplPdfPrintRequest(
     sn="KM118DW123",
     file=Path("/pdf/demo.pdf"),
+    dpi=300,
 )
 response = client.get_acs_response(request)
 ```
@@ -582,6 +587,7 @@ from kuaimai_core.request import TsplPdfPrintRequest
 request = TsplPdfPrintRequest(
     sn="KM118DW123",
     file=Path("/pdf/demo.pdf"),
+    dpi=300,
 )
 response = client.tsplPdfsPrint(request)
 ```

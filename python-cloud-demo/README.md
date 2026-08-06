@@ -78,9 +78,9 @@ pip install -r requirements-py36.txt
 两个 requirements 文件会分别安装对应的本地 wheel，例如：
 
 ```text
-./packages/python_kuaimai_core-0.1.0-py3-none-any.whl
+./packages/python_kuaimai_core-0.1.1-py3-none-any.whl
 ./packages/qrcode-7.3.1-py3-none-any.whl
-./packages/python_kuaimai_core_legacy-0.1.0-py3-none-any.whl
+./packages/python_kuaimai_core_legacy-0.1.1-py3-none-any.whl
 ```
 
 然后 `pip` 会继续安装 SDK 依赖的 Python 包，例如：
@@ -327,6 +327,13 @@ python CloudExample.py
 
 SDK 会对图片、PDF 做适当缩放后再下发打印。
 
+TSPL 标签机支持 `dpi=203`（默认）和 `dpi=300`。使用 300dpi 时：
+
+- 模板图片打印直接按 12 dots/mm 渲染，不先生成 203dpi 图片再放大
+- 图片直打建议同时传 `setWidth`、`setHeight`，单位为 mm
+- PDF 会先按 300dpi 转换，再按目标标签尺寸生成点阵
+- 其他 dpi 值会在请求下发前返回参数错误
+
 例如：
 
 - `tsplPdfPrint` / `tsplPdfsPrint` 会按标签尺寸处理
@@ -376,8 +383,8 @@ SDK 会对图片、PDF 做适当缩放后再下发打印。
 如果你拿到了新的 wheel 包，需要在当前虚拟环境里强制重装一次：
 
 ```bash
-pip install --force-reinstall --no-deps ./packages/python_kuaimai_core-0.1.0-py3-none-any.whl         # Python 3.10+
-pip install --force-reinstall --no-deps ./packages/python_kuaimai_core_legacy-0.1.0-py3-none-any.whl  # Python 3.6–3.9
+pip install --force-reinstall --no-deps ./packages/python_kuaimai_core-0.1.1-py3-none-any.whl         # Python 3.10+
+pip install --force-reinstall --no-deps ./packages/python_kuaimai_core_legacy-0.1.1-py3-none-any.whl  # Python 3.6–3.9
 ```
 
 否则当前环境里可能还在使用旧版本 SDK。

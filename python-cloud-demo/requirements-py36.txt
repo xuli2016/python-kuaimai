@@ -1,2 +1,2 @@
 ./packages/qrcode-7.3.1-py3-none-any.whl
-./packages/python_kuaimai_core_legacy-0.1.0-py3-none-any.whl
+./packages/python_kuaimai_core_legacy-0.1.1-py3-none-any.whl
